@@ -1,0 +1,42 @@
+# Port
+
+Port | Group | Service
+--- |--- |---
+55000 | Jenkins | Jenkins
+55001 | Keycloak | Keycloak-Db
+55002 | Keycloak | Keycloak-Server
+55003 | Nginx | Nginx-Web
+55004 | Postgres | Postgres-Db
+55005 | Postgres | Postgres-Adminer
+55006 | Postgres | Postgres-Pgadmin
+55007 | Postgres | Postgres-Grafana
+55008 | Redis | Redis-Cache
+55009 | Redis | Redis-Admin
+55010 | ElasticSearch | Reference-ElasticSearch
+55011 | ElasticSearch | Reference-ElasticSearch
+55012 | ElasticSearch | Reference-Kibana
+55013 | Kafka | Reference-Zookeeper
+55014 | Kafka | Reference-Broker-1
+55015 | Kafka | Reference-ControlCenter
+55016 | Mongodb | Reference-Mongodb
+55017 | Mongodb | Reference-MongodbExpress
+55018 | Outline | Reference-Outline-Outline
+55019 | Outline | Reference-Outline-Redis
+55020 | Outline | Reference-Outline-Db
+55021 | Outline | Reference-Outline-Storage
+55022 | Outline | Reference-Outline-StorageConsole
+55023 | Metabase | Reference-Metabase-Metabase
+55024 | Metabase | Reference-Metabase-Db
+55025 | Metabase | Reference-Metabase-Example-Db
+55026 | Mysql | Reference-Mysql
+55027 | Kafka | Reference-Broker-2
+55028 | Kafka | Reference-Broker-3
+55029 | Kafka | Reference-Kafka-Ui
+55030 | Kafka | Reference-Schema-Registry
+55031 | Kafka | Reference-Broker-1
+55032 | Kafka | Reference-Broker-2
+55033 | Kafka | Reference-Broker-3
+55034 | DockerRegistry | Reference-DockerRegistry
+55035 | DockerRegistry | Reference-DockerRegistry-Ui
+55036 | Minio | Reference-Minio
+55037 | Minio | Reference-Minio
