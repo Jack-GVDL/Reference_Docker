@@ -1,6 +1,6 @@
 # credential
-# username: minioadmin
-# password: minioadmin
+# username: $(MINIO_ACCESS_KEY)
+# password: $(MINIO_SECRET_KEY)
 
 ACCESS_KEY = $(shell openssl rand -hex 20)
 SECRET_KEY = $(shell openssl rand -hex 20)
