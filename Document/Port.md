@@ -40,3 +40,4 @@ Port | Group | Service
 55035 | DockerRegistry | Reference-DockerRegistry-Ui
 55036 | Minio | Reference-Minio
 55037 | Minio | Reference-Minio
+55038 | EurekaServer | Reference-EurekaServer
