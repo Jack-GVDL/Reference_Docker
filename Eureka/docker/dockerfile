@@ -1,0 +1,24 @@
+FROM maven:3-amazoncorretto-17 AS dependency
+
+WORKDIR /build
+
+COPY pom.xml .
+
+RUN --mount=type=cache,target=/root/.m2 mvn dependency:resolve
+
+FROM dependency AS build
+
+WORKDIR /build
+
+COPY src src
+
+RUN --mount=type=cache,target=/root/.m2 mvn clean package
+
+FROM openjdk:17-alpine
+
+WORKDIR /app
+
+COPY docker/entrypoint.sh .
+COPY --from=build /build/target/*.jar /app/app.jar
+
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
