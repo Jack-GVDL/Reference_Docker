@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  eureka-server:
+    container_name: Reference-EurekaServer
+    image: eureka-server
+    restart: always
+    ports:
+      - ${EUREKA_SERVER_PORT}:8761
