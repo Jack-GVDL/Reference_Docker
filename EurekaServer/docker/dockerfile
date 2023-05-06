@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY pom.xml .
 
-RUN --mount=type=cache,target=/root/.m2 mvn dependency:resolve
+RUN --mount=type=cache,target=/root/.m2 mvn dependency:go-offline
 
 FROM dependency AS build
 
