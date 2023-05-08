@@ -1,0 +1,25 @@
+version: '3.7'
+
+volumes:
+  Reference_Redis_Data:
+    driver: local
+
+services:
+  cache:
+    container_name: Reference-Redis-Cache
+    image: redis:latest
+    restart: always
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - Reference_Redis_Data:/data
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+
+  admin:
+    container_name: Reference-Redis-Admin
+    image: patrikx3/p3x-redis-ui:latest
+    restart: always
+    ports:
+      - ${REDIS_PORT_UI}:7843
+    volumes:
+      - Reference_Redis_Data:/settings
