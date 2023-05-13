@@ -1,0 +1,15 @@
+version: '3.7'
+
+volumes:
+  Reference_Grafana:
+
+services:
+  grafana:
+    container_name: Reference-Grafana
+    image: grafana/grafana:9.5.2
+    restart: always
+    ports:
+      - ${GRAFANA_PORT}:3000
+    volumes:
+      - ./data/datasources:/etc/grafana/provisioning/datasources
+      - Reference_Grafana:/var/lib/grafana

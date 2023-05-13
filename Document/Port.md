@@ -41,3 +41,4 @@ Port | Group | Service
 55036 | Minio | Reference-Minio
 55037 | Minio | Reference-Minio
 55038 | EurekaServer | Reference-EurekaServer
+55039 | Grafana | Reference-Grafana
