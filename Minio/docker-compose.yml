@@ -11,6 +11,6 @@ services:
       - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
     ports:
-      - 55036:9000
-      - 55037:9091 # console
+      - ${MINIO_PORT_CORE}:9000
+      - ${MINIO_PORT_CONSOLE}:9091 # console
     command: ['server', '/data', '--address', ':9090', '--console-address', ':9091']

@@ -4,6 +4,8 @@
 
 ACCESS_KEY = $(shell openssl rand -hex 20)
 SECRET_KEY = $(shell openssl rand -hex 20)
+DEFAULT_PORT_CORE = 55036
+DEFAULT_PORT_CONSOLE = 55037
 
 init: init-dir init-env
 
@@ -16,6 +18,8 @@ init-env:
 	@touch .env
 	@echo 'MINIO_ACCESS_KEY=$(ACCESS_KEY)' >> .env
 	@echo 'MINIO_SECRET_KEY=$(SECRET_KEY)' >> .env
+	@echo 'MINIO_PORT_CORE=$(DEFAULT_PORT_CORE)' >> .env
+	@echo 'MINIO_PORT_CONSOLE=$(DEFAULT_PORT_CONSOLE)' >> .env
 
 up:
 	docker-compose \
