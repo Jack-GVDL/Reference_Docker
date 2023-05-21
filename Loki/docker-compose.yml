@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  loki:
+    container_name: Reference-Loki
+    image: grafana/loki:2.8.2  # latest release can be found in https://github.com/grafana/loki/releases
+    restart: always
+    volumes:
+      - ./data/config/loki/config.yml:/etc/loki/config.yml
+      - ./data/data:/loki
+    ports:
+      - ${LOKI_PORT}:3100
+
+  promtail:
+    container_name: Reference-Loki-Promtail
+    image: grafana/promtail:2.8.2
+    restart: always
+    volumes:
+      - ./data/config/promtail/config.yml:/etc/promtail/config.yml
+      - ./data/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+
+  # fake log generator for common log format
+  # - need to create file in host first
+  # - overwriter (-w) flag
+  # - log type (-t log)
+  flog:
+    container_name: Reference-Loki-Flog
+    image: mingrammer/flog
+    command: -f apache_common -t log -d 1s -l -o /output/access.log -w
+    restart: always
+    volumes:
+      - ./data/log:/output
