@@ -1,0 +1,19 @@
+version: '3.7'
+
+volumes:
+  Reference_Mysql_Db:
+    driver: local
+
+services:
+  mysql:
+    image: mysql:8.0.32
+    container_name: Reference-Mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # user: root
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=${MYSQL_ADMIN_PASSWORD}
+    ports:
+      - ${MYSQL_PORT}:3306
+    volumes:
+      - Reference_Mysql_Db:/var/lib/mysql

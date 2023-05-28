@@ -42,3 +42,4 @@ Port | Group | Service
 55037 | Minio | Reference-Minio
 55038 | EurekaServer | Reference-EurekaServer
 55039 | Grafana | Reference-Grafana
+55040 | Loki | Reference-Loki
