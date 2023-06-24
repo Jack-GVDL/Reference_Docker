@@ -43,3 +43,7 @@ Port | Group | Service
 55038 | EurekaServer | Reference-EurekaServer
 55039 | Grafana | Reference-Grafana
 55040 | Loki | Reference-Loki
+55041 | InvenTree | Referenece-InvenTree-Postgres
+55042 | InvenTree | Reference-InvenTree-Redis
+55043 | InvenTree | Reference-InvenTree-Server
+55044 | InvenTree | Reference-InvenTree-Proxy
