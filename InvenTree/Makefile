@@ -7,7 +7,7 @@ init:
 	docker compose run inventree-server invoke superuser
 
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
