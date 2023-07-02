@@ -2,6 +2,11 @@ ROOT_PASSWORD = $(shell openssl rand -hex 20)
 ADMIN_PASSWORD = $(shell openssl rand -hex 20)
 DEFAULT_PORT = 55026
 
+all:
+	@echo init
+	@echo up
+	@echo down
+
 init: init-env
 
 init-env:

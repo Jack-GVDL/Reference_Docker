@@ -5,6 +5,11 @@ ADMIN_PASSWORD = $(shell openssl rand -hex 10)
 DEFAULT_PORT_MONGO = 55016
 DEFAULT_PORT_ADMIN = 55017
 
+all:
+	@echo init
+	@echo up
+	@echo down
+
 init: init-dir init-env
 
 init-dir:

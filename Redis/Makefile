@@ -2,6 +2,11 @@ REDIS_PASSWORD = $(shell openssl rand -hex 10)
 DEFAULT_PORT_REDIS = 55008
 DEFAULT_PORT_REDIS_UI = 55009
 
+all:
+	@echo init
+	@echo up
+	@echo down
+
 init: init-env
 
 init-env:

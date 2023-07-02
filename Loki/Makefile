@@ -1,5 +1,10 @@
 DEFAULT_PORT = 55040
 
+all:
+	@echo init
+	@echo up
+	@echo down
+
 init: init-dir init-env
 
 init-dir:

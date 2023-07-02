@@ -7,6 +7,11 @@ SECRET_KEY = $(shell openssl rand -hex 20)
 DEFAULT_PORT_CORE = 55036
 DEFAULT_PORT_CONSOLE = 55037
 
+all:
+	@echo init
+	@echo up
+	@echo down
+
 init: init-dir init-env
 
 init-dir:

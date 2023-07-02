@@ -1,3 +1,9 @@
+all:
+	@echo clear
+	@echo init
+	@echo up
+	@echo down
+
 clear:
 	docker volume rm -f inventree-production_inventree_data
 	docker volume rm -f inventree-production_inventree_db
