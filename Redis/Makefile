@@ -1,6 +1,7 @@
-REDIS_PASSWORD = $(shell openssl rand -hex 10)
-DEFAULT_PORT_REDIS = 55008
-DEFAULT_PORT_REDIS_UI = 55009
+PASSWORD = $(shell openssl rand -hex 10)
+REDIS_PORT = 55008
+REDIS_UI_PORT = 55009
+PROJECT_NAME = reference_redis
 
 all:
 	@echo init
@@ -12,14 +13,18 @@ init: init-env
 init-env:
 	@rm -f .env
 	@touch .env
-	@echo 'REDIS_PORT=$(DEFAULT_PORT_REDIS)' >> .env
-	@echo 'REDIS_PORT_UI=$(DEFAULT_PORT_REDIS_UI)' >> .env
-	@echo 'REDIS_PASSWORD=$(REDIS_PASSWORD)' >> .env
+	@echo 'REDIS_PORT=$(REDIS_PORT)' >> .env
+	@echo 'REDIS_UI_PORT=$(REDIS_UI_PORT)' >> .env
+	@echo 'PASSWORD=$(PASSWORD)' >> .env
 
 up:
-	docker-compose \
+	docker compose \
 	--env-file .env \
+	--project-name $(PROJECT_NAME) \
 	up -d
 
 down:
-	docker-compose down
+	docker compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	down

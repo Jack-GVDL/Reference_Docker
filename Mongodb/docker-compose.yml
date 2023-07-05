@@ -6,18 +6,18 @@ services:
     image: mongo:6.0.5
     restart: always
     ports:
-      - ${MONGO_PORT_MONGO}:27017
+      - ${PORT_MONGO}:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER_NAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${USER_NAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${PASSWORD}
 
   mongo-express:
     container_name: Reference-MongoExpress
     image: mongo-express:latest
     restart: always
     ports:
-      - ${MONGO_PORT_ADMIN}:8081
+      - ${PORT_ADMIN}:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ADMIN_USER_NAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ADMIN_PASSWORD}
-      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER_NAME}:${MONGO_PASSWORD}@mongo:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ADMIN_USER_NAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ADMIN_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${USER_NAME}:${PASSWORD}@mongo:27017/

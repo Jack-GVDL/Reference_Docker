@@ -8,9 +8,9 @@ services:
       - ./data/data:/data
       - ./data/config:/root/.minio
     environment:
-      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
-      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - MINIO_ACCESS_KEY=${ACCESS_KEY}
+      - MINIO_SECRET_KEY=${SECRET_KEY}
     ports:
-      - ${MINIO_PORT_CORE}:9000
-      - ${MINIO_PORT_CONSOLE}:9091 # console
+      - ${PORT_CORE}:9000
+      - ${PORT_CONSOLE}:9091 # console
     command: ['server', '/data', '--address', ':9090', '--console-address', ':9091']

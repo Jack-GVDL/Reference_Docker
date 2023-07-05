@@ -1,3 +1,5 @@
+PROJECT_NAME = reference_inventree
+
 all:
 	@echo clear
 	@echo init
@@ -13,7 +15,11 @@ init:
 	docker compose run inventree-server invoke superuser
 
 up:
-	docker compose up -d
+	docker compose up \
+	--project-name $(PROJECT_NAME) \
+	-d
 
 down:
-	docker compose down
+	docker compose \
+	--project-name $(PROJECT_NAME) \
+	down

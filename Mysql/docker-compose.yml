@@ -10,9 +10,9 @@ services:
     container_name: Reference-Mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # user: root
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD} # user: root
       - MYSQL_USER=admin
-      - MYSQL_PASSWORD=${MYSQL_ADMIN_PASSWORD}
+      - MYSQL_PASSWORD=${ADMIN_PASSWORD}
     ports:
       - ${MYSQL_PORT}:3306
     volumes:

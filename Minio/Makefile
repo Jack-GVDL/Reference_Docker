@@ -4,8 +4,9 @@
 
 ACCESS_KEY = $(shell openssl rand -hex 20)
 SECRET_KEY = $(shell openssl rand -hex 20)
-DEFAULT_PORT_CORE = 55036
-DEFAULT_PORT_CONSOLE = 55037
+PORT_CORE = 55036
+PORT_CONSOLE = 55037
+PROJECT_NAME = reference_minio
 
 all:
 	@echo init
@@ -21,15 +22,19 @@ init-dir:
 init-env:
 	@rm -f .env
 	@touch .env
-	@echo 'MINIO_ACCESS_KEY=$(ACCESS_KEY)' >> .env
-	@echo 'MINIO_SECRET_KEY=$(SECRET_KEY)' >> .env
-	@echo 'MINIO_PORT_CORE=$(DEFAULT_PORT_CORE)' >> .env
-	@echo 'MINIO_PORT_CONSOLE=$(DEFAULT_PORT_CONSOLE)' >> .env
+	@echo 'ACCESS_KEY=$(ACCESS_KEY)' >> .env
+	@echo 'SECRET_KEY=$(SECRET_KEY)' >> .env
+	@echo 'PORT_CORE=$(PORT_CORE)' >> .env
+	@echo 'PORT_CONSOLE=$(PORT_CONSOLE)' >> .env
 
 up:
-	docker-compose \
+	docker compose \
 	--env-file .env \
+	--project-name $(PROJECT_NAME) \
 	up -d
 
 down:
-	docker-compose down
+	docker compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	down
