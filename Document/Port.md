@@ -47,3 +47,6 @@ Port | Group | Service
 55042 | InvenTree | Reference-InvenTree-Redis
 55043 | InvenTree | Reference-InvenTree-Server
 55044 | InvenTree | Reference-InvenTree-Proxy
+55045 | Airflow | Reference-Airflow-Redis
+55046 | Airflow | Reference-Airflow-Webserver
+55047 | Airflow | Reference-Airflow-Flower
