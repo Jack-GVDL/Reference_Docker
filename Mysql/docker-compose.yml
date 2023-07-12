@@ -6,8 +6,8 @@ volumes:
 
 services:
   mysql:
-    image: mysql:8.0.32
     container_name: Reference-Mysql
+    image: mysql:8.0.32
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD} # user: root

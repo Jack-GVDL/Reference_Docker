@@ -1,0 +1,18 @@
+version: '3.7'
+
+volumes:
+  Reference_Postgres_Db:
+    driver: local
+
+services:
+  postgres:
+    container_name: Reference-Postgres
+    image: postgres:15.3
+    restart: always
+    volumes:
+      - Reference_Postgres_Db:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
