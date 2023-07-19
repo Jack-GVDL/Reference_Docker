@@ -1,0 +1,135 @@
+version: '3.7'
+
+x-common:
+  kafka:
+    environment: &kafka_env
+      KAFKA_BOOTSTRAP.SERVERS: broker-1:29091,broker-2:29091,broker-3:29091
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29091
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+
+volumes:
+  Reference_ZooKeeper_Log:
+    driver: local
+  Reference_ZooKeeper_Data:
+    driver: local
+  Reference_Broker_1:
+    driver: local
+  Reference_Broker_2:
+    driver: local
+  Reference_Broker_3:
+    driver: local
+
+services:
+  zookeeper:
+    container_name: Reference-Kafka-ZooKeeper
+    image: confluentinc/cp-zookeeper:5.3.1
+    ports:
+      - ${ZOOKEEPER_PORT}:2181
+    volumes:
+      - Reference_ZooKeeper_Log:/var/lib/zookeeper/log
+      - Reference_ZooKeeper_Data:/var/lib/zookeeper/data
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker-1:
+    container_name: Reference-Kafka-Broker-1
+    image: confluentinc/cp-kafka:5.3.1
+    depends_on:
+      - zookeeper
+    ports:
+      - ${BROKER_1_PLAINTEXT_PORT}:29091
+      - ${BROKER_1_PLAINTEXT_HOST_PORT}:9091
+    volumes:
+      - Reference_Broker_1:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://host.docker.internal:55031
+      <<: *kafka_env
+
+  broker-2:
+    container_name: Reference-Kafka-Broker-2
+    image: confluentinc/cp-kafka:5.3.1
+    depends_on:
+      - zookeeper
+    ports:
+      - ${BROKER_2_PLAINTEXT_PORT}:29091
+      - ${BROKER_2_PLAINTEXT_HOST_PORT}:9091
+    volumes:
+      - Reference_Broker_2:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://host.docker.internal:55032
+      <<: *kafka_env
+
+  broker-3:
+    container_name: Reference-Kafka-Broker-3
+    image: confluentinc/cp-kafka:5.3.1
+    depends_on:
+      - zookeeper
+    ports:
+      - ${BROKER_3_PLAINTEXT_PORT}:29091
+      - ${BROKER_3_PLAINTEXT_HOST_PORT}:9091
+    volumes:
+      - Reference_Broker_3:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://host.docker.internal:55033
+      <<: *kafka_env
+
+  control-center:
+    container_name: Reference-Kafka-ControlCenter
+    image: confluentinc/cp-enterprise-control-center:5.3.1
+    depends_on:
+      - zookeeper
+      - broker-1
+      - broker-2
+      - broker-3
+    ports:
+      - ${CONTROL_CENTER_PORT}:9021
+    environment:
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: host.docker.internal:55031,host.docker.internal:55032,host.docker.internal:55033
+      CONTROL_CENTER_ZOOKEEPER_CONNECT: zookeeper:2181
+      CONTROL_CENTER_CONNECT_CLUSTER: connect:8083
+      CONTROL_CENTER_KSQL_URL: http://ksql-server:8088
+      CONTROL_CENTER_KSQL_ADVERTISED_URL: http://localhost:8088
+      CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONTROL_CENTER_REPLICATION_FACTOR: 1
+      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
+      CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
+      CONFLUENT_METRICS_TOPIC_REPLICATION: 1
+      PORT: 9021
+
+  kafka-ui:
+    container_name: Reference-Kafka-Ui
+    image: provectuslabs/kafka-ui:latest
+    depends_on:
+      - zookeeper
+      - broker-1
+      - broker-2
+      - broker-3
+    ports:
+    - ${KAFKA_UI_PORT}:8080
+    environment:
+      DYNAMIC_CONFIG_ENABLED: true
+    volumes:
+      - ./data/config.yml:/etc/kafkaui/dynamic_config.yaml
+
+  schema-registry:
+    container_name: Reference-Kafka-Schema-Registry
+    image: confluentinc/cp-schema-registry:latest
+    depends_on:
+      - zookeeper
+      - broker-1
+      - broker-2
+      - broker-3
+    ports:
+      - ${SCHMEA_REGISTRY_PORT}:8085
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schemaregistry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: host.docker.internal:55031,host.docker.internal:55032,host.docker.internal:55033
+      SCHEMA_REGISTRY_LISTENERS: http://schema-registry:8085
+      SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL: PLAINTEXT

@@ -1,0 +1,22 @@
+# name:                         cluster name
+# bootstrapServers:             where to connect
+# schemaRegistry:               schemaRegistry's address
+# schemaRegistryAuth.username:  schemaRegistry's basic authentication username
+# schemaRegistryAuth.password:  schemaRegistry's basic authentication password
+# schemaNameTemplate:           how keys are saved to Schema Registry
+# metrics.port:                 open the JMX port of a broker
+# metrics.type:                 Type of metrics, either JMX or PROMETHEUS. Defaulted to JMX.
+# readOnly:                     enable read-only mode
+
+kafka:
+  clusters:
+    -
+      name: local
+      bootstrapServers: host.docker.internal:55031,host.docker.internal:55032,host.docker.internal:55033
+      schemaRegistry: http://schema-registry:8085
+      schemaRegistryAuth:
+        username: schemaregistryUser
+        password: abcd1234
+      metrics:
+        port: 9997
+        type: JMX
