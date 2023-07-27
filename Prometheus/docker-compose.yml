@@ -1,0 +1,22 @@
+version: '3.7'
+
+volumes:
+  Reference_Prometheus_Data:
+    driver: local
+
+services:
+  prometheus:
+    container_name: Reference-Prometheus
+    image: prom/prometheus:v2.36.2
+    restart: always
+    volumes:
+      - ./config:/etc/prometheus/
+      - Reference_Prometheus_Data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    ports:
+      - ${PROMETHEUS_PORT}:9090

@@ -1,7 +1,7 @@
-ROOT_PASSWORD = $(shell openssl rand -hex 20)
-ADMIN_PASSWORD = $(shell openssl rand -hex 20)
-MYSQL_PORT = 55026
-PROJECT_NAME = reference_mysql
+ROOT_PASSWORD=$(shell openssl rand -hex 20)
+ADMIN_PASSWORD=$(shell openssl rand -hex 20)
+MYSQL_PORT=55026
+PROJECT_NAME=reference_mysql
 
 all:
 	@echo init

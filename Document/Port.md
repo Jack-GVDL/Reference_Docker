@@ -50,3 +50,6 @@ Port | Group | Service
 55045 | Airflow | Reference-Airflow-Redis
 55046 | Airflow | Reference-Airflow-Webserver
 55047 | Airflow | Reference-Airflow-Flower
+55048 | Strapi | Reference-Strapi
+55049 | Strapi | Reference-Strapi-Db
+55050 | Prometheus | Reference-Prometheus
