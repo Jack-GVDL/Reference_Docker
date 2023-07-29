@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  zipkin:
+    container_name: ${ZIPKIN_CONTAINER_NAME}
+    image: openzipkin/zipkin
+    ports:
+      - ${ZIPKIN_PORT}:9411
