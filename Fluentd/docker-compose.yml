@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  fluentd:
+    container_name: ${FLUENTD_CONTAINER_NAME}
+    image: fluent/fluentd:v1.3-debian-1
+    restart: always
+    volumes:
+      - ./data:/fluentd/log
+      - ./conf:/fluentd/etc
+    ports:
+      - ${FLUENTD_PORT}:24224

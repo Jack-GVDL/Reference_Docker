@@ -4,5 +4,6 @@ services:
   zipkin:
     container_name: ${ZIPKIN_CONTAINER_NAME}
     image: openzipkin/zipkin
+    restart: always
     ports:
       - ${ZIPKIN_PORT}:9411
