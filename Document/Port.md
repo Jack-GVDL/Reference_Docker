@@ -53,3 +53,5 @@ Port | Group | Service
 55048 | Strapi | Reference-Strapi
 55049 | Strapi | Reference-Strapi-Db
 55050 | Prometheus | Reference-Prometheus
+55051 | Zipkin | Reference-Zipkin
+55052 | Fluentd | Reference-Fluentd
