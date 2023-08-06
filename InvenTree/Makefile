@@ -1,4 +1,4 @@
-PROJECT_NAME = reference_inventree
+PROJECT_NAME=reference_inventree
 
 all:
 	@echo clear
@@ -7,12 +7,19 @@ all:
 	@echo down
 
 clear:
-	docker volume rm -f inventree-production_inventree_data
-	docker volume rm -f inventree-production_inventree_db
+	docker volume rm -f $(PROJECT_NAME)_inventree_data
+	docker volume rm -f $(PROJECT_NAME)_inventree_db
 
 init:
-	docker compose run inventree-server invoke update
-	docker compose run inventree-server invoke superuser
+	docker-compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	run inventree-server invoke update
+
+	docker-compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	run inventree-server invoke superuser
 
 up:
 	docker compose up \

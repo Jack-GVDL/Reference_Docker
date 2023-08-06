@@ -40,8 +40,7 @@ services:
     inventree-db:
         container_name: Referenece-InvenTree-Postgres
         image: postgres:13
-        expose:
-            - ${INVENTREE_DB_PORT:-5432}/tcp
+        restart: unless-stopped
         environment:
             # - PGDATA=/var/lib/postgresql/data/pgdb
             - POSTGRES_USER=${INVENTREE_DB_USER:?You must provide the 'INVENTREE_DB_USER' variable in the .env file}
@@ -52,22 +51,23 @@ services:
             # - inventree_db:/var/lib/postgresql/data/
             - inventree_db:/var/lib/postgresql/data
             # - ${INVENTREE_EXT_VOLUME}:/var/lib/postgresql/data/
-        restart: unless-stopped
+        ports:
+            - ${INVENTREE_DB_PORT:-5432}:5432
 
     # redis acts as database cache manager
     # only runs under the "redis" profile : https://docs.docker.com/compose/profiles/
     inventree-cache:
         container_name: Reference-InvenTree-Redis
         image: redis:7.0
+        restart: always
         depends_on:
             - inventree-db
         profiles:
             - redis
         env_file:
             - .env
-        expose:
-            - ${INVENTREE_CACHE_PORT:-6379}
-        restart: always
+        ports:
+            - ${INVENTREE_CACHE_PORT:-6379}:6379
 
     # InvenTree web server service
     # Uses gunicorn as the web server
@@ -75,12 +75,13 @@ services:
         container_name: Reference-InvenTree-Server
         # If you wish to specify a particular InvenTree version, do so here
         image: inventree/inventree:${INVENTREE_TAG:-stable}
+        restart: unless-stopped
         # Only change this port if you understand the stack.
         # If you change this you have to change:
         # - the proxy settings (on two lines)
         # - only change the exposed port - eg `1338:8000` if you want to expose the server on port 1338
-        expose:
-            - 8000
+        ports:
+            - ${INVENTREE_SERVER_PORT:-8000}:8000
         depends_on:
             - inventree-db
         env_file:
@@ -89,13 +90,13 @@ services:
             # Data volume must map to /home/inventree/data
             - inventree_data:/home/inventree/data
             # - ${INVENTREE_EXT_VOLUME}:/home/inventree/data
-        restart: unless-stopped
 
     # Background worker process handles long-running or periodic tasks
     inventree-worker:
         container_name: Reference-InvenTree-Worker
         # If you wish to specify a particular InvenTree version, do so here
         image: inventree/inventree:${INVENTREE_TAG:-stable}
+        restart: unless-stopped
         command: invoke worker
         depends_on:
             - inventree-server
@@ -105,7 +106,6 @@ services:
             # Data volume must map to /home/inventree/data
             - inventree_data:/home/inventree/data
             # - ${INVENTREE_EXT_VOLUME}:/home/inventree/data
-        restart: unless-stopped
 
     # nginx acts as a reverse proxy
     # static files are served directly by nginx
@@ -115,6 +115,7 @@ services:
     inventree-proxy:
         container_name: Reference-InvenTree-Proxy
         image: nginx:stable
+        restart: unless-stopped
         depends_on:
             - inventree-server
         env_file:
@@ -129,17 +130,6 @@ services:
             # nginx proxy needs access to static and media files
             - inventree_data:/var/www
             # - ${INVENTREE_EXT_VOLUME}:/var/www
-        restart: unless-stopped
-
-# volumes:
-#     # Persistent data, stored external to the container(s)
-#     inventree_data:
-#         driver: local
-#         driver_opts:
-#             type: none
-#             o: bind
-#             # This directory specified where InvenTree data are stored "outside" the docker containers
-#             device: ${INVENTREE_EXT_VOLUME:?You must specify the 'INVENTREE_EXT_VOLUME' variable in the .env file!}
 
 volumes:
   inventree_data:
