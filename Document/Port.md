@@ -55,3 +55,4 @@ Port | Group | Service
 55050 | Prometheus | Reference-Prometheus
 55051 | Zipkin | Reference-Zipkin
 55052 | Fluentd | Reference-Fluentd
+55053 | Gitlab | Reference-GitLab-Server

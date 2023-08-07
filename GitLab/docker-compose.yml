@@ -1,0 +1,24 @@
+version: '3.7'
+
+volumes:
+  Reference_GitLab_Etc:
+    driver: local
+  Reference_GitLab_Opt:
+    driver: local
+
+services:
+  web:
+    container_name: ${GITLAB_CONTAINER_NAME}
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['initial_root_password'] = '${ROOT_PASSWORD}'
+    ports:
+      - ${GITLAB_SERVER_HTTP_PORT}:80
+      - ${GITLAB_SERVER_HTTPS_PORT}:443
+      - ${GITLAB_SERVER_SSH_PORT}:22
+    volumes:
+      - Reference_GitLab_Etc:/etc/gitlab
+      - Reference_GitLab_Opt:/var/opt/gitlab
+      - ./data/log:/var/log/gitlab
