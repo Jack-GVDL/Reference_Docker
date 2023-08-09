@@ -1,4 +1,5 @@
 API_KEY=
+CONTAINER_NAME=Reference-ShellGpt
 PROJECT_NAME=reference_shellgpt
 
 all:
@@ -28,3 +29,6 @@ down:
 	--env-file .env \
 	--project-name $(PROJECT_NAME) \
 	down
+
+shell:
+	docker exec -it $(CONTAINER_NAME) sh
