@@ -1,16 +1,16 @@
-KEYCLOAK_PORT = 55002
-KEYCLOAK_USER = admin
-KEYCLOAK_PASSWORD  =$(shell openssl rand -hex 20)
-POSTGRES_PORT = 55001
-POSTGRES_USER = admin
-POSTGRES_PASSWORD  =$(shell openssl rand -hex 20)
-POSTGRES_DATABASE = keycloak
-PROJECT_NAME = reference_keycloak
+KEYCLOAK_PORT=55002
+KEYCLOAK_USER=admin
+KEYCLOAK_PASSWORD=$(shell openssl rand -hex 20)
+POSTGRES_PORT=55001
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=$(shell openssl rand -hex 20)
+POSTGRES_DATABASE=keycloak
+PROJECT_NAME=reference_keycloak
 
 all:
 	@echo init
 	@echo up
-	@echo downs
+	@echo down
 
 init: init-env
 
