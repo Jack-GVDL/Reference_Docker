@@ -1,0 +1,9 @@
+FROM python:3.11
+
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y git
+
+RUN pip install shell-gpt
+
+CMD sleep infinity

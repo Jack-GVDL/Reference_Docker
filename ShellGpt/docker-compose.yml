@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  shell-gpt:
+    container_name: Reference-ShellGpt
+    image: shell-gpt
+    restart: always
+    environment:
+      OPENAI_API_KEY: ${API_KEY}
