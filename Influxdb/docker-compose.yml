@@ -1,0 +1,22 @@
+version: '3.7'
+
+volumes:
+  Reference_Influxdb:
+    driver: local
+
+services:
+  influxdb:
+    image: ${INFLUXDB_IMAGE_VERSION}
+    container_name: ${INFLUXDB_CONTAINER_NAME}
+    ports:
+      - ${INFLUXDB_PORT}:8086
+    volumes:
+      - Reference_Influxdb:/var/lib/influxdb
+      - ./config/config.yml:/var/lib/influxdb/config.yml
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USER}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ORG: reference
+      DOCKER_INFLUXDB_INIT_BUCKET: reference
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_ADMIN_TOKEN}
