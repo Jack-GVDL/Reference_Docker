@@ -1,12 +1,12 @@
-POSTGRES_PORT = 55004
-POSTGRES_USER = admin
-POSTGRES_PASSWORD = $(shell openssl rand -hex 20)
-PROJECT_NAME = reference_postgres
+POSTGRES_PORT=55004
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=$(shell openssl rand -hex 20)
+PROJECT_NAME=reference_postgres
 
 all:
 	@echo init
 	@echo up
-	@echo downs
+	@echo down
 
 init: init-env
 
