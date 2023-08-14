@@ -14,12 +14,14 @@ all:
 init: init-config init-env
 
 init-config:
+	@rm -f config/config.yml
+	@touch config/config.yml
 	docker run \
 	--rm ${INFLUXDB_IMAGE_VERSION} \
 	influxd print-config > ./config/config.yml
 
 init-env:
-	@rm -rf .env
+	@rm -f .env
 	@touch .env
 	@echo 'INFLUXDB_PORT=$(INFLUXDB_PORT)' >> .env
 	@echo 'INFLUXDB_CONTAINER_NAME=$(INFLUXDB_CONTAINER_NAME)' >> .env
