@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  mqtt:
+    container_name: ${MQTT_CONTAINER_NAME}
+    image: eclipse-mosquitto:2.0
+    ports:
+      - ${MQTT_PORT_DEFAULT}:1883
+      - ${MQTT_PORT_WEBSOCKET}:9001
+    volumes:
+      - ./data/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./data/data:/mosquitto/data
+      - ./data/log:/mosquitto/log
