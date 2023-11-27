@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    container_name: ${RABBITMQ_CONTAINER_NAME}
+    image: rabbitmq:3-management
+    ports:
+      - ${RABBITMQ_PORT_DEFAULT}:5672
+      - ${RABBITMQ_PORT_MANAGEMENT}:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASSWORD}
