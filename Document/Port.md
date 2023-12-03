@@ -1,7 +1,7 @@
 # Port
 
-Port | Group | Service
---- |--- |---
+Port | Group | Service | Env
+--- |--- |--- |---
 55000 | Jenkins | Jenkins
 55001 | Keycloak | Keycloak-Db
 55002 | Keycloak | Keycloak-Server
@@ -60,3 +60,5 @@ Port | Group | Service
 55055 | Superset | Reference-Superset
 55056 | Mqtt | Reference-Mqtt
 55057 | Mqtt | Reference-Mqtt
+55058 | RabbitMq | Reference-RabbitMq | RABBIT_MQ_PORT_DEFAULT
+55059 | RabbitMq | Reference-RabbitMq | RABBIT_MQ_PORT_MANAGEMENT
