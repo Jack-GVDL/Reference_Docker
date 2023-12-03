@@ -1,5 +1,7 @@
 REGISTRY_PORT=55034
 UI_PORT=55035
+REGISTRY_CONTAINER_NAME=Reference-DockerRegistry
+REGISTRY_UI_CONTAINER_NAME=Reference-DockerRegistry-Ui
 PROJECT_NAME=reference_registry
 
 all:
@@ -13,6 +15,8 @@ init-env:
 	@rm -f .env
 	@touch .env
 	@echo 'REGISTRY_PORT=$(REGISTRY_PORT)' >> .env
+	@echo 'REGISTRY_CONTAINER_NAME=$(REGISTRY_CONTAINER_NAME)' >> .env
+	@echo 'REGISTRY_UI_CONTAINER_NAME=$(REGISTRY_UI_CONTAINER_NAME)' >> .env
 	@echo 'UI_PORT=$(UI_PORT)' >> .env
 
 up:

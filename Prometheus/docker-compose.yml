@@ -6,7 +6,7 @@ volumes:
 
 services:
   prometheus:
-    container_name: Reference-Prometheus
+    container_name: ${PROMETHEUS_CONTAINER_NAME}
     image: prom/prometheus:v2.36.2
     restart: always
     volumes:

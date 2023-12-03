@@ -1,7 +1,7 @@
 MQTT_PORT_DEFAULT=55056
 MQTT_PORT_WEBSOCKET=55057
-PROJECT_NAME=reference_mqtt
 MQTT_CONTAINER_NAME=Reference-Mqtt
+PROJECT_NAME=reference_mqtt
 
 all:
 	@echo init

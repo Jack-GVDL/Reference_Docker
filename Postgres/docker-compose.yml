@@ -6,7 +6,7 @@ volumes:
 
 services:
   postgres:
-    container_name: Reference-Postgres
+    container_name: ${POSTGRES_CONTAINER_NAME}
     image: postgres:15.3
     restart: always
     volumes:

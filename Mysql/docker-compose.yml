@@ -6,7 +6,7 @@ volumes:
 
 services:
   mysql:
-    container_name: Reference-Mysql
+    container_name: ${MYSQL_CONTAINER_NAME}
     image: mysql:8.0.32
     restart: always
     environment:

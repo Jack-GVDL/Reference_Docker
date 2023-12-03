@@ -6,17 +6,17 @@ volumes:
 
 services:
   cache:
-    container_name: Reference-Redis-Cache
+    container_name: ${REDIS_CACHE_CONTAINER_NAME}
     image: redis:latest
     restart: always
     ports:
-      - ${REDIS_PORT}:6379
+      - ${REDIS_CACHE_PORT}:6379
     volumes:
       - Reference_Redis_Data:/data
     command: redis-server --requirepass ${PASSWORD}
 
   admin:
-    container_name: Reference-Redis-Admin
+    container_name: ${REDIS_ADMIN_CONTAINER_NAME}
     image: patrikx3/p3x-redis-ui:latest
     restart: always
     ports:
