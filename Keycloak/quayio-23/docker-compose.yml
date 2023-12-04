@@ -1,0 +1,40 @@
+version: '3.7'
+
+volumes:
+  Reference_Keycloak_Quayio_Db:
+      driver: local
+
+services:
+  keycloak:
+    container_name: ${KEYCLOAK_SERVER_CONTAINER_NAME}
+    image: quay.io/keycloak/keycloak:23.0.1
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - ${KEYCLOAK_SERVER_PORT}:8080
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_SERVER_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_SERVER_PASSWORD}
+    command: >
+      start-dev
+        --db postgres
+        --db-url-host postgres
+        --db-url-port 5432
+        --db-url-database ${KEYCLOAK_POSTGRES_DATABASE}
+        --db-schema public
+        --db-username ${KEYCLOAK_POSTGRES_USER}
+        --db-password ${KEYCLOAK_POSTGRES_PASSWORD}
+
+  postgres:
+    container_name: ${KEYCLOAK_POSTGRES_CONTAINER_NAME}
+    image: postgres:15.3
+    restart: always
+    volumes:
+      - Reference_Keycloak_Quayio_Db:/var/lib/postgresql/data
+    ports:
+      - ${KEYCLOAK_POSTGRES_PORT}:5432
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_POSTGRES_DATABASE}
+      POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD}

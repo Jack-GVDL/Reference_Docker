@@ -1,0 +1,38 @@
+version: '3.7'
+
+volumes:
+  Reference_Keycloak_Bitnami_Db:
+    driver: local
+
+services:
+  keycloak:
+    container_name: ${KEYCLOAK_SERVER_CONTAINER_NAME}
+    image: docker.io/bitnami/keycloak:22
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - ${KEYCLOAK_SERVER_PORT}:8080
+    environment:
+      KEYCLOAK_DATABASE_VENDOR: postgresql
+      KEYCLOAK_DATABASE_HOST: postgres
+      KEYCLOAK_DATABASE_PORT: 5432
+      KEYCLOAK_DATABASE_NAME: ${KEYCLOAK_POSTGRES_DATABASE}
+      KEYCLOAK_DATABASE_SCHEMA: public
+      KEYCLOAK_DATABASE_USER: ${KEYCLOAK_POSTGRES_USER}
+      KEYCLOAK_DATABASE_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD}
+      KEYCLOAK_ADMIN_USER: ${KEYCLOAK_SERVER_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_SERVER_PASSWORD}
+
+  postgres:
+    container_name: ${KEYCLOAK_POSTGRES_CONTAINER_NAME}
+    image: postgres:15.3
+    restart: always
+    volumes:
+      - Reference_Keycloak_Bitnami_Db:/var/lib/postgresql/data
+    ports:
+      - ${KEYCLOAK_POSTGRES_PORT}:5432
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_POSTGRES_DATABASE}
+      POSTGRES_USER: ${KEYCLOAK_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${KEYCLOAK_POSTGRES_PASSWORD}

@@ -1,0 +1,42 @@
+KEYCLOAK_SERVER_PORT=55002
+KEYCLOAK_SERVER_USER=admin
+KEYCLOAK_SERVER_PASSWORD=$(shell openssl rand -hex 20)
+KEYCLOAK_SERVER_CONTAINER_NAME=Reference-Keycloak-Server
+KEYCLOAK_POSTGRES_PORT=55001
+KEYCLOAK_POSTGRES_USER=admin
+KEYCLOAK_POSTGRES_PASSWORD=$(shell openssl rand -hex 20)
+KEYCLOAK_POSTGRES_DATABASE=keycloak
+KEYCLOAK_POSTGRES_CONTAINER_NAME=Reference-Keycloak-Postgres
+PROJECT_NAME=reference_keycloak
+
+all:
+	@echo init
+	@echo up
+	@echo down
+
+init: init-env
+
+init-env:
+	@rm -rf .env
+	@touch .env
+	@echo 'KEYCLOAK_SERVER_PORT=$(KEYCLOAK_SERVER_PORT)' >> .env
+	@echo 'KEYCLOAK_SERVER_USER=$(KEYCLOAK_SERVER_USER)' >> .env
+	@echo 'KEYCLOAK_SERVER_PASSWORD=$(KEYCLOAK_SERVER_PASSWORD)' >> .env
+	@echo 'KEYCLOAK_SERVER_CONTAINER_NAME=$(KEYCLOAK_SERVER_CONTAINER_NAME)' >> .env
+	@echo 'KEYCLOAK_POSTGRES_PORT=$(KEYCLOAK_POSTGRES_PORT)' >> .env
+	@echo 'KEYCLOAK_POSTGRES_USER=$(KEYCLOAK_POSTGRES_USER)' >> .env
+	@echo 'KEYCLOAK_POSTGRES_PASSWORD=$(KEYCLOAK_POSTGRES_PASSWORD)' >> .env
+	@echo 'KEYCLOAK_POSTGRES_DATABASE=$(KEYCLOAK_POSTGRES_DATABASE)' >> .env
+	@echo 'KEYCLOAK_POSTGRES_CONTAINER_NAME=$(KEYCLOAK_POSTGRES_CONTAINER_NAME)' >> .env
+
+up:
+	docker compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	up -d
+
+down:
+	docker compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	down
