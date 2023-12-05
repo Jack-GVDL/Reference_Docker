@@ -1,0 +1,14 @@
+route:
+  receiver: email
+
+receivers:
+  - name: email
+    email_configs:
+      - smarthost: smtp.gmail.com:587
+        auth_username:
+        auth_identity:
+        auth_password:
+        from:
+        to:
+        tls_config:
+          insecure_skip_verify: true

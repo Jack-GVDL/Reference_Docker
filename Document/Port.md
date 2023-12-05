@@ -62,3 +62,4 @@ Port | Group | Service | Env
 55057 | Mqtt | Reference-Mqtt
 55058 | RabbitMq | Reference-RabbitMq | RABBIT_MQ_PORT_DEFAULT
 55059 | RabbitMq | Reference-RabbitMq | RABBIT_MQ_PORT_MANAGEMENT
+55060 | AlertManager | Reference-AlertManager | ALERT_MANAGER_PORT

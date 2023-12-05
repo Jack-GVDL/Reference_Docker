@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  alertmanager:
+    container_name: ${ALERT_MANAGER_CONTAINER_NAME}
+    image: bitnami/alertmanager:0.25.0
+    restart: always
+    ports:
+      - ${ALERT_MANAGER_PORT}:9093
+    volumes:
+      - ./config/alertmanager.yml:/opt/bitnami/alertmanager/conf/config.yml
+      - ./data:/opt/bitnami/alertmanager/data
