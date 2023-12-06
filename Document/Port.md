@@ -63,3 +63,5 @@ Port | Group | Service | Env
 55058 | RabbitMq | Reference-RabbitMq | RABBIT_MQ_PORT_DEFAULT
 55059 | RabbitMq | Reference-RabbitMq | RABBIT_MQ_PORT_MANAGEMENT
 55060 | AlertManager | Reference-AlertManager | ALERT_MANAGER_PORT
+55061 | MailHog | Reference-MailHog | MAILHOG_PORT_SMTP
+55062 | MailHog | Reference-MailHog | MAILHOG_PORT_HTTP

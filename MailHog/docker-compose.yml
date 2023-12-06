@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  mailhog:
+    container_name: ${MAILHOG_CONTAINER_NAME}
+    image: mailhog/mailhog:v1.0.1
+    restart: always
+    ports:
+      - ${MAILHOG_PORT_SMTP}:1025
+      - ${MAILHOG_PORT_HTTP}:8025
