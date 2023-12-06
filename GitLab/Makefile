@@ -6,14 +6,10 @@ GITLAB_CONTAINER_NAME=Reference-GitLab
 PROJECT_NAME=reference_gitlab
 
 all:
-	@echo clear
 	@echo init
 	@echo up
 	@echo down
-
-clear:
-	docker volume rm $(PROJECT_NAME)_Reference_GitLab_Etc
-	docker volume rm $(PROJECT_NAME)_Reference_GitLab_Opt
+	@echo clean
 
 init: init-env
 
@@ -37,3 +33,7 @@ down:
 	--env-file .env \
 	--project-name $(PROJECT_NAME) \
 	down
+
+clean:
+	docker volume rm $(PROJECT_NAME)_Reference_GitLab_Etc
+	docker volume rm $(PROJECT_NAME)_Reference_GitLab_Opt

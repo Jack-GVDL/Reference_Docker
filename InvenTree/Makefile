@@ -1,14 +1,10 @@
 PROJECT_NAME=reference_inventree
 
 all:
-	@echo clear
 	@echo init
 	@echo up
 	@echo down
-
-clear:
-	docker volume rm -f $(PROJECT_NAME)_inventree_data
-	docker volume rm -f $(PROJECT_NAME)_inventree_db
+	@echo clean
 
 init:
 	docker-compose \
@@ -30,3 +26,7 @@ down:
 	docker compose \
 	--project-name $(PROJECT_NAME) \
 	down
+
+clean:
+	docker volume rm -f $(PROJECT_NAME)_inventree_data
+	docker volume rm -f $(PROJECT_NAME)_inventree_db
