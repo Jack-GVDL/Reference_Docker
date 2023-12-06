@@ -1,0 +1,17 @@
+version: '3.7'
+
+volumes:
+  Reference_ClickHouse_Db:
+    driver: local
+
+services:
+  clickhouse:
+    container_name: ${CLICKHOUSE_CONTAINER_NAME}
+    image: clickhouse/clickhouse-server:23.8
+    restart: always
+    ports:
+      - ${CLICKHOUSE_PORT_HTTP}:8123
+      - ${CLICKHOUSE_PORT_NATIVE_CLIENT}:9000
+    volumes:
+      - Reference_ClickHouse_Db:/var/lib/clickhouse
+      - ./log:/var/lib/clickhouse-server

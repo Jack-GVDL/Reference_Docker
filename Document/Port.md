@@ -65,3 +65,5 @@ Port | Group | Service | Env
 55060 | AlertManager | Reference-AlertManager | ALERT_MANAGER_PORT
 55061 | MailHog | Reference-MailHog | MAILHOG_PORT_SMTP
 55062 | MailHog | Reference-MailHog | MAILHOG_PORT_HTTP
+55063 | ClickHouse | Reference-ClickHouse | CLICKHOUSE_PORT_HTTP
+55064 | ClickHouse | Reference-ClickHouse | CLICKHOUSE_PORT_NATIVE_CLIENT
