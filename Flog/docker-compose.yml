@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  template:
+    container_name: ${FLOG_CONTAINER_NAME}
+    image: mingrammer/flog
+    restart: always
+    volumes:
+      - ./data/log:/output
+    command: -f apache_common -t log -d 1s -l -o /output/access.log -w
