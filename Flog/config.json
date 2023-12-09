@@ -1,0 +1,38 @@
+{
+  "init": {
+    "option": [
+      {
+        "name": "FLOG_LOG_FORMAT",
+        "description": "log format.",
+        "type": "select",
+        "select": {
+          "type": "string",
+          "option": [
+            "apache_common",
+            "apache_combined",
+            "apache_error",
+            "rfc3164",
+            "rfc5424",
+            "json"
+          ]
+        }
+      },
+      {
+        "name": "FLOG_NUMBER_OF_LINE",
+        "description": "number of lines to generate.",
+        "type": "number",
+        "number": {
+          "min": 0
+        }
+      },
+      {
+        "name": "FLOG_DELAY",
+        "description": "delay log generation speed (default unit \"seconds\").",
+        "type": "number",
+        "number": {
+          "min": 0
+        }
+      }
+    ]
+  }
+}

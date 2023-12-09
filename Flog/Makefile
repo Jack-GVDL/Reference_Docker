@@ -1,10 +1,4 @@
-# FLOG_LOG_FORMAT=apache_common
-# FLOG_LOG_FORMAT=apache_combined
 FLOG_LOG_FORMAT=apache_error
-# FLOG_LOG_FORMAT=rfc3164
-# FLOG_LOG_FORMAT=rfc5424
-# FLOG_LOG_FORMAT=json
-
 FLOG_CONTAINER_NAME=Reference-Flog
 PROJECT_NAME=reference_flog
 
