@@ -7,4 +7,4 @@ services:
     restart: always
     volumes:
       - ./data/log:/output
-    command: -f apache_common -t log -d 1s -l -o /output/access.log -w
+    command: -f ${FLOG_LOG_FORMAT} -t log -d 1s -l -o /output/${FLOG_LOG_FORMAT}/access.log -w

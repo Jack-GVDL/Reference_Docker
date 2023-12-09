@@ -31,6 +31,7 @@ Superset |
 Name | Description | DockerHub
 --- |--- |---
 MailHog | | https://hub.docker.com/r/mailhog/mailhog
+Flog | | https://github.com/mingrammer/flog/tree/master
 
 ## Observability
 
