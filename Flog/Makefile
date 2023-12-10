@@ -1,4 +1,4 @@
-FLOG_LOG_FORMAT=apache_error
+FLOG_LOG_FORMAT=apache_common
 FLOG_CONTAINER_NAME=Reference-Flog
 PROJECT_NAME=reference_flog
 
@@ -10,6 +10,7 @@ all:
 
 info:
 	@echo '$(FLOG_CONTAINER_NAME)'
+	@echo 'Log: /output/$(FLOG_LOG_FORMAT).log'
 
 init: init-env
 
