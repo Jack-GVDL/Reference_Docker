@@ -1,5 +1,5 @@
 FLOG_LOG_FORMAT=apache_common
-FLOG_LOG_PATH=$(PWD)
+FLOG_LOG_PATH=$(PWD)/log/
 FLOG_CONTAINER_NAME=Reference-Flog
 PROJECT_NAME=reference_flog
 
@@ -10,7 +10,7 @@ all:
 	@echo info
 
 info:
-	@echo 'Loki'
+	@echo 'Flog'
 	@echo 'Log: /output/$(FLOG_LOG_FORMAT).log'
 
 init: init-env
