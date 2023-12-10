@@ -67,3 +67,6 @@ Port | Group | Service | Env
 55062 | MailHog | Reference-MailHog | MAILHOG_PORT_HTTP
 55063 | ClickHouse | Reference-ClickHouse | CLICKHOUSE_PORT_HTTP
 55064 | ClickHouse | Reference-ClickHouse | CLICKHOUSE_PORT_NATIVE_CLIENT
+55065 | LDAP | Reference-Ldap | LDAP_PORT_SERVER_HTTP
+55066 | LDAP | Reference-Ldap | LDAP_PORT_SERVER_TLS
+55067 | LDAP | Reference-Ldap | LDAP_PORT_ADMIN

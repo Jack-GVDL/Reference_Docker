@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  server:
+    container_name: ${LDAP_SERVER_CONTAINER_NAME}
+    image: osixia/openldap:latest
+    restart: always
+    ports:
+      - ${LDAP_PORT_SERVER_HTTP}:389
+      - ${LDAP_PORT_SERVER_TLS}:636
+
+  admin:
+    container_name: ${LDAP_ADMIN_CONTAINER_NAME}
+    image: osixia/phpldapadmin:latest
+    restart: always
+    ports:
+      - ${LDAP_PORT_ADMIN}:443
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=server
