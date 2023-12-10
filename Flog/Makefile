@@ -1,4 +1,5 @@
 FLOG_LOG_FORMAT=apache_common
+FLOG_LOG_PATH=$(PWD)
 FLOG_CONTAINER_NAME=Reference-Flog
 PROJECT_NAME=reference_flog
 
@@ -9,7 +10,7 @@ all:
 	@echo info
 
 info:
-	@echo '$(FLOG_CONTAINER_NAME)'
+	@echo 'Loki'
 	@echo 'Log: /output/$(FLOG_LOG_FORMAT).log'
 
 init: init-env
@@ -18,6 +19,7 @@ init-env:
 	@rm -f .env
 	@touch .env
 	@echo 'FLOG_LOG_FORMAT=$(FLOG_LOG_FORMAT)' >> .env
+	@echo 'FLOG_LOG_PATH=$(FLOG_LOG_PATH)' >> .env
 	@echo 'FLOG_CONTAINER_NAME=$(FLOG_CONTAINER_NAME)' >> .env
 
 up:

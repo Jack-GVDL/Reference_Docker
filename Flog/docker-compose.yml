@@ -6,5 +6,5 @@ services:
     image: mingrammer/flog
     restart: always
     volumes:
-      - ./data/log:/output
+      - ${FLOG_LOG_PATH}/data/log:/output
     command: -f ${FLOG_LOG_FORMAT} -t log -d 1s -l -o /output/${FLOG_LOG_FORMAT}.log -w
