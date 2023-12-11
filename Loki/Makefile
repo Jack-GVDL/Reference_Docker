@@ -1,7 +1,8 @@
 LOKI_PORT=55040
-LOKI_LOG_PATH=$(PWD)/log/
-LOKI_CONFIG_PATH=$(PWD)/config/
-LOKI_DATA_PATH=$(PWD)/data/
+LOKI_LOG_PATH=$(PWD)/log/loki/
+LOKI_CONFIG_PATH=$(PWD)/config/loki/
+LOKI_DATA_PATH=$(PWD)/data/loki/
+LOKI_FLOG_CONTAINER_NAME=Reference-Loki-Flog
 LOKI_LOKI_CONTAINER_NAME=Reference-Loki-Loki
 LOKI_PROMTAIL_CONTAINER_NAME=Reference-Loki-Promtail
 PROJECT_NAME=reference_loki
@@ -17,6 +18,7 @@ info:
 	@echo 'Frontend: http://localhost:$(LOKI_PORT)'
 
 init: init-dir init-env
+	@echo 'Initiated'
 
 init-dir:
 	@mkdir -p data/data
@@ -30,6 +32,7 @@ init-env:
 	@echo 'LOKI_DATA_PATH=$(LOKI_DATA_PATH)' >> .env
 	@echo 'LOKI_LOKI_CONTAINER_NAME=$(LOKI_LOKI_CONTAINER_NAME)' >> .env
 	@echo 'LOKI_PROMTAIL_CONTAINER_NAME=$(LOKI_PROMTAIL_CONTAINER_NAME)' >> .env
+	@echo 'LOKI_FLOG_CONTAINER_NAME=$(LOKI_FLOG_CONTAINER_NAME)' >> .env
 
 up:
 	docker compose \

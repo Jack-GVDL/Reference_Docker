@@ -7,7 +7,7 @@ services:
     restart: always
     volumes:
       - ${LOKI_CONFIG_PATH}loki/config.yml:/etc/loki/config.yml
-      - ${LOKI_DATA_PATH}loki:/loki
+      - ${LOKI_DATA_PATH}:/loki
     ports:
       - ${LOKI_PORT}:3100
 
