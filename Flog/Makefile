@@ -1,5 +1,5 @@
 FLOG_LOG_FORMAT=apache_common
-FLOG_LOG_PATH=$(PWD)/log/
+FLOG_LOG_PATH=$(PWD)/log/flog/
 FLOG_CONTAINER_NAME=Reference-Flog
 PROJECT_NAME=reference_flog
 
