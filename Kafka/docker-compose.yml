@@ -24,7 +24,7 @@ volumes:
 
 services:
   zookeeper:
-    container_name: Reference-Kafka-ZooKeeper
+    container_name: ${ZOOKEEPER_CONTAINER_NAME}
     image: confluentinc/cp-zookeeper:5.3.1
     ports:
       - ${ZOOKEEPER_PORT}:2181
@@ -36,7 +36,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
 
   broker-1:
-    container_name: Reference-Kafka-Broker-1
+    container_name: ${BROKER_1_CONTAINER_NAME}
     image: confluentinc/cp-kafka:5.3.1
     depends_on:
       - zookeeper
@@ -51,7 +51,7 @@ services:
       <<: *kafka_env
 
   broker-2:
-    container_name: Reference-Kafka-Broker-2
+    container_name: ${BROKER_2_CONTAINER_NAME}
     image: confluentinc/cp-kafka:5.3.1
     depends_on:
       - zookeeper
@@ -66,7 +66,7 @@ services:
       <<: *kafka_env
 
   broker-3:
-    container_name: Reference-Kafka-Broker-3
+    container_name: ${BROKER_3_CONTAINER_NAME}
     image: confluentinc/cp-kafka:5.3.1
     depends_on:
       - zookeeper
@@ -81,7 +81,7 @@ services:
       <<: *kafka_env
 
   control-center:
-    container_name: Reference-Kafka-ControlCenter
+    container_name: ${CONTROL_CENTER_CONTAINER_NAME}
     image: confluentinc/cp-enterprise-control-center:5.3.1
     depends_on:
       - zookeeper
@@ -104,7 +104,7 @@ services:
       PORT: 9021
 
   kafka-ui:
-    container_name: Reference-Kafka-Ui
+    container_name: ${KAFKA_UI_CONTAINER_NAME}
     image: provectuslabs/kafka-ui:latest
     depends_on:
       - zookeeper
@@ -119,7 +119,7 @@ services:
       - ./data/config.yml:/etc/kafkaui/dynamic_config.yaml
 
   schema-registry:
-    container_name: Reference-Kafka-Schema-Registry
+    container_name: ${SCHEMA_REGISTRY_CONTAINER_NAME}
     image: confluentinc/cp-schema-registry:latest
     depends_on:
       - zookeeper
