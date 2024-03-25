@@ -70,3 +70,4 @@ Port | Group | Service | Env
 55065 | LDAP | Reference-Ldap | LDAP_PORT_SERVER_HTTP
 55066 | LDAP | Reference-Ldap | LDAP_PORT_SERVER_TLS
 55067 | LDAP | Reference-Ldap | LDAP_PORT_ADMIN
+55068 | Consul-Single | Reference-Consul-Single | CONSUL_SINGLE_UI_PORT

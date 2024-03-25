@@ -1,0 +1,19 @@
+version: '3.7'
+
+networks:
+  consul_single:
+    driver: bridge
+
+services:
+  consul:
+    container_name: ${CONSUL_SINGLE_CONTAINER_NAME}
+    image: consul:1.15
+    restart: always
+    networks:
+      - consul_single
+    ports:
+      - ${CONSUL_SINGLE_UI_PORT}:8500
+    volumes:
+      - ./data:/consul/data
+      - ./config:/consul/config
+    command: agent -server -bootstrap -node=1 -ui
