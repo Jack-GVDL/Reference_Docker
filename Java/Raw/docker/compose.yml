@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  executor:
+    image: ${PROJECT_NAME}/executor:latest
+    restart: always
+    environment:
+      PORT: 8080
+      LOG_DIR: /var/log
+
+  gateway:
+    image: ${PROJECT_NAME}/gateway:latest
+    restart: always
+    environment:
+      PORT: 8080
+      EXECUTOR_SERVICE_URL: http://executor:8080
+      LOG_DIR: /var/log
+    ports:
+      - ${GATEWAY_PORT}:8080

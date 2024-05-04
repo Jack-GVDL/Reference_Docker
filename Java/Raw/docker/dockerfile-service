@@ -1,0 +1,29 @@
+FROM docker-reference/raw/common AS build
+
+ARG SERVICE
+
+# - https://stackoverflow.com/questions/27767264/how-to-dockerize-maven-project-and-how-many-ways-to-accomplish-it
+# - https://stackoverflow.com/questions/1114026/maven-modules-building-a-single-specific-module
+
+WORKDIR /build
+
+COPY common/src common/src
+COPY ${SERVICE}/src ${SERVICE}/src
+
+# maven command flags
+# -pl, --projects
+#         Build specified reactor projects instead of all projects
+# -am, --also-make
+#         If project list is specified, also build projects required by the list
+RUN --mount=type=cache,target=/root/.m2 mvn clean package -pl ${SERVICE} -am
+
+FROM docker-reference/raw/runtime
+
+ARG SERVICE
+
+WORKDIR /app
+
+COPY docker/entrypoint.sh .
+COPY --from=build /build/${SERVICE}/target/*.jar /app/app.jar
+
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]

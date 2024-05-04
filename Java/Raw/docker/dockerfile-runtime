@@ -1,0 +1,21 @@
+# https://careers.wolt.com/en/blog/tech/how-to-reduce-jvm-docker-image-size
+FROM amazoncorretto:17-alpine AS jre-build
+
+# required for strip-debug to work
+RUN apk add --no-cache binutils
+
+# https://docs.oracle.com/en/java/javase/17/docs/specs/man/jlink.html
+RUN jlink \
+--add-modules ALL-MODULE-PATH \
+--strip-debug \
+--no-man-pages \
+--no-header-files \
+--compress=2 \
+--output /jre
+
+FROM alpine:3.17
+
+ENV JAVA_HOME=/jre
+ENV PATH="{JAVA_HOME}/bin:${PATH}"
+
+COPY --from=jre-build /jre $JAVA_HOME
