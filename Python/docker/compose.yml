@@ -1,0 +1,6 @@
+version: "3.8"
+
+services:
+  logger:
+    image: ${PROJECT_NAME}:latest
+    restart: always
