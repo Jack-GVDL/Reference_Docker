@@ -1,4 +1,4 @@
-PROJECT_NAME=docker-reference/raw
+PROJECT_NAME=docker-reference/java/raw
 
 all:
 	@echo "Run command"
