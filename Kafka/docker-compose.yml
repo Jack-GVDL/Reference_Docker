@@ -38,6 +38,7 @@ services:
   broker-1:
     container_name: ${BROKER_1_CONTAINER_NAME}
     image: confluentinc/cp-kafka:5.3.1
+    restart: always
     depends_on:
       - zookeeper
     ports:
@@ -53,6 +54,7 @@ services:
   broker-2:
     container_name: ${BROKER_2_CONTAINER_NAME}
     image: confluentinc/cp-kafka:5.3.1
+    restart: always
     depends_on:
       - zookeeper
     ports:
@@ -68,6 +70,7 @@ services:
   broker-3:
     container_name: ${BROKER_3_CONTAINER_NAME}
     image: confluentinc/cp-kafka:5.3.1
+    restart: always
     depends_on:
       - zookeeper
     ports:
