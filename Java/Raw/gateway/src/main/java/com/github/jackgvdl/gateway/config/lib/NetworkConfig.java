@@ -1,4 +1,4 @@
-package com.github.jackgvdl.gateway.config;
+package com.github.jackgvdl.gateway.config.lib;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

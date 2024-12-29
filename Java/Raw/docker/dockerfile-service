@@ -1,4 +1,7 @@
-FROM docker-reference/raw/common AS build
+ARG COMMON_IMAGE
+ARG RUNTIME_IMAGE
+
+FROM ${COMMON_IMAGE} AS build
 
 ARG SERVICE
 
@@ -17,7 +20,7 @@ COPY ${SERVICE}/src ${SERVICE}/src
 #         If project list is specified, also build projects required by the list
 RUN --mount=type=cache,target=/root/.m2 mvn clean package -pl ${SERVICE} -am
 
-FROM docker-reference/raw/runtime
+FROM ${RUNTIME_IMAGE}
 
 ARG SERVICE
 

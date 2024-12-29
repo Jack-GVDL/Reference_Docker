@@ -19,23 +19,29 @@ build-runtime:
 build-executor: build-common build-runtime
 	docker build \
 		-f ./docker/dockerfile-service \
+		--build-arg COMMON_IMAGE=$(PROJECT_NAME)/common \
+		--build-arg RUNTIME_IMAGE=$(PROJECT_NAME)/runtime \
 		--build-arg SERVICE=executor \
 		-t $(PROJECT_NAME)/executor .
 
 build-gateway: build-common build-runtime
 	docker build \
 		-f ./docker/dockerfile-service \
+		--build-arg COMMON_IMAGE=$(PROJECT_NAME)/common \
+		--build-arg RUNTIME_IMAGE=$(PROJECT_NAME)/runtime \
 		--build-arg SERVICE=gateway \
 		-t $(PROJECT_NAME)/gateway .
 
 up: build
 	docker-compose -f docker/compose.yml \
 		--env-file ./docker/.env \
+		--project-name $(PROJECT_NAME) \
 		up -d
 
 down:
 	docker-compose -f docker/compose.yml \
 		--env-file ./docker/.env \
+		--project-name $(PROJECT_NAME) \
 		down
 
 # - https://forums.docker.com/t/how-to-remove-none-images-after-building/7050/2
