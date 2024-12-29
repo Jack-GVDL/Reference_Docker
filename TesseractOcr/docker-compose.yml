@@ -1,0 +1,11 @@
+services:
+  mysql:
+    container_name: ${TESSERACT_OCR_CONTAINER_NAME}
+    image: jitesoft/tesseract-ocr:5
+    # restart: always
+    stdin_open: true
+    tty: true
+    entrypoint: /bin/bash
+    volumes:
+      - ./example:/example
+      - ./data:/data
