@@ -3,15 +3,23 @@ version: '3.7'
 services:
   registry:
     container_name: ${REGISTRY_CONTAINER_NAME}
+    restart: always
     image: registry
     ports:
       - ${REGISTRY_PORT}:5000
+    environment:
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '[http://localhost:41011]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,OPTIONS,DELETE]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Credentials: '[true]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers: '[Docker-Content-Digest]'
     volumes:
       - ./data:/var/lib/registry
-      - ./config/config.yml:/etc/docker/registry/config.yml
+      # - ./config/config.yml:/etc/docker/registry/config.yml
 
   registry-ui:
     container_name: ${REGISTRY_UI_CONTAINER_NAME}
+    restart: always
     image: joxit/docker-registry-ui
     ports:
       - ${UI_PORT}:80
