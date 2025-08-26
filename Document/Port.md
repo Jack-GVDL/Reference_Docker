@@ -71,3 +71,7 @@ Port | Group | Service | Env
 55066 | LDAP | Reference-Ldap | LDAP_PORT_SERVER_TLS
 55067 | LDAP | Reference-Ldap | LDAP_PORT_ADMIN
 55068 | Consul-Single | Reference-Consul-Single | CONSUL_SINGLE_UI_PORT
+55069 | Nacos | Nacos | NACOS_NACOS_PORT_8080
+55070 | Nacos | Nacos | NACOS_NACOS_PORT_8848
+55071 | Nacos | Nacos | NACOS_NACOS_PORT_9848
+55072 | Nacos | Nacos-Mysql | NACOS_MYSQL_PORT
