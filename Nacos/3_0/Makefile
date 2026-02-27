@@ -1,0 +1,47 @@
+NACOS_NACOS_CONTAINER_NAME=Reference-Nacos-Server
+NACOS_NACOS_AUTH_TOKEN=$(shell openssl rand -hex 32)
+NACOS_NACOS_AUTH_IDENTITY_KEY=2222
+NACOS_NACOS_AUTH_IDENTITY_VALUE=2xxx
+NACOS_NACOS_PORT_8080=55069
+NACOS_NACOS_PORT_8848=55070
+NACOS_NACOS_PORT_9848=55071
+NACOS_MYSQL_CONTAINER_NAME=Reference-Nacos-Mysql
+NACOS_MYSQL_ROOT_PASSWORD=$(shell openssl rand -hex 20)
+NACOS_MYSQL_ADMIN_PASSWORD=$(shell openssl rand -hex 20)
+NACOS_MYSQL_PORT=55072
+PROJECT_NAME=reference_nacos
+
+all:
+	@echo init
+	@echo volume
+	@echo up
+	@echo down
+
+init: init-env
+
+init-env:
+	@rm -rf .env
+	@touch .env
+	@echo 'NACOS_NACOS_CONTAINER_NAME=$(NACOS_NACOS_CONTAINER_NAME)' >> .env
+	@echo 'NACOS_NACOS_AUTH_TOKEN=$(NACOS_NACOS_AUTH_TOKEN)' >> .env
+	@echo 'NACOS_NACOS_AUTH_IDENTITY_KEY=$(NACOS_NACOS_AUTH_IDENTITY_KEY)' >> .env
+	@echo 'NACOS_NACOS_AUTH_IDENTITY_VALUE=$(NACOS_NACOS_AUTH_IDENTITY_VALUE)' >> .env
+	@echo 'NACOS_NACOS_PORT_8080=$(NACOS_NACOS_PORT_8080)' >> .env
+	@echo 'NACOS_NACOS_PORT_8848=$(NACOS_NACOS_PORT_8848)' >> .env
+	@echo 'NACOS_NACOS_PORT_9848=$(NACOS_NACOS_PORT_9848)' >> .env
+	@echo 'NACOS_MYSQL_CONTAINER_NAME=$(NACOS_MYSQL_CONTAINER_NAME)' >> .env
+	@echo 'NACOS_MYSQL_ROOT_PASSWORD=$(NACOS_MYSQL_ROOT_PASSWORD)' >> .env
+	@echo 'NACOS_MYSQL_ADMIN_PASSWORD=$(NACOS_MYSQL_ADMIN_PASSWORD)' >> .env
+	@echo 'NACOS_MYSQL_PORT=$(NACOS_MYSQL_PORT)' >> .env
+
+up:
+	docker compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	up -d
+
+down:
+	docker compose \
+	--env-file .env \
+	--project-name $(PROJECT_NAME) \
+	down

@@ -1,0 +1,49 @@
+version: '3.7'
+
+volumes:
+  Reference_Nacos_Db:
+    driver: local
+
+services:
+  nacos:
+    container_name: ${NACOS_NACOS_CONTAINER_NAME}
+    image: nacos/nacos-server:latest
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - MODE=standalone
+      - SPRING_DATASOURCE_PLATFORM=mysql
+      - MYSQL_SERVICE_HOST=mysql
+      - MYSQL_SERVICE_DB_NAME=nacos
+      - MYSQL_SERVICE_PORT=3306
+      - MYSQL_SERVICE_USER=admin
+      - MYSQL_SERVICE_PASSWORD=${NACOS_MYSQL_ADMIN_PASSWORD}
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      - NACOS_AUTH_TOKEN=${NACOS_NACOS_AUTH_TOKEN}
+      - NACOS_AUTH_IDENTITY_KEY=${NACOS_NACOS_AUTH_IDENTITY_KEY}
+      - NACOS_AUTH_IDENTITY_VALUE=${NACOS_NACOS_AUTH_IDENTITY_VALUE}
+    ports:
+      - ${NACOS_NACOS_PORT_8080}:8080
+      - ${NACOS_NACOS_PORT_8848}:8848
+      - ${NACOS_NACOS_PORT_9848}:9848
+
+  mysql:
+    container_name: ${NACOS_MYSQL_CONTAINER_NAME}
+    image: mysql:8.4
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${NACOS_MYSQL_ROOT_PASSWORD} # user: root
+      - MYSQL_DATABASE=nacos
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=${NACOS_MYSQL_ADMIN_PASSWORD}
+    ports:
+      - ${NACOS_MYSQL_PORT}:3306
+    volumes:
+      - Reference_Nacos_Db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
